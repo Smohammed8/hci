@@ -1,0 +1,413 @@
+
+       
+
+
+<style>
+a{
+	
+font-weight:bold;	
+}
+</style>
+
+<?php 
+$admin_id		= $this->session->userdata('admin_id');
+             
+?> 
+<div class="sidebar-menu">
+<!-- style='background-color: #dd4814;'-->
+    <header class="logo-env"  >
+
+        <!-- logo -->
+    <!--    <div class="logo" style="">
+            <a href="#"> <img src="uploads/logo.png"  style="max-height:60px;"/>
+            </a>
+			<span style=" color:white; font-weight:bold;"> <i><?php //echo get_phrase('system_name');?></i></span>
+		
+        </div>
+		-->
+		
+		     <div class="logo" style="">
+           <center>  <a href="#"> <img src="uploads/1215.jpg"  style="max-height:70px;width:70px;"/> 
+            </a> </center> 
+			<span style=" color:white;">
+			<center> Jimma University</center> 
+				<center> Jimma Medical Center 	</center>
+			<center><small> Welcome to Integrated IMS System </small></center> </span> 
+		
+        </div>
+		
+
+        <!-- logo collapse icon -->
+        <div class="sidebar-collapse" style="">
+            <a href="#" class="sidebar-collapse-icon with-animation">
+
+                <i class="entypo-menu"></i>
+            </a>
+        </div>
+	
+        <!-- open/close menu icon (do not remove if you want to enable menu on mobile devices) -->
+        <div class="sidebar-mobile-menu visible-xs">
+            <a href="#" class="with-animation">
+                <i class="entypo-menu"></i>
+            </a>
+        </div>
+		
+    </header>
+	
+	
+ <hr>
+    <ul id="main-menu" class="multiple-expanded">
+        <!-- add class "multiple-expanded" to allow multiple submenus to open -->
+        <!-- class "auto-inherit-active-class" will automatically add "active" class for parent elements who are marked already with class "active" -->
+
+
+        <!-- DASHBOARD -->
+        <li class="<?php if ($page_name == 'dashboard') echo 'active'; ?> ">
+            <a href="<?php echo base_url(); ?>index.php?admin/dashboard">
+                <i class="fa fa-home"></i>
+                <span><?php echo get_phrase('dashboard'); ?></span>
+            </a>
+        </li>
+
+        <!-- STUDENT -->
+        <li class="<?php
+        if ($page_name == 'patient_add' ||
+                $page_name == 'patient_bulk_add' ||
+                $page_name == 'patient_information')
+            echo 'opened active has-sub';
+        ?> ">
+            <a href="#">
+                <i class="fa fa-group"></i>
+                <span><?php echo get_phrase('patient_information'); ?></span>
+            </a>
+			
+			
+			
+            <ul>
+                <!-- PATIENTS ADMISSION -->
+                <li class="<?php if ($page_name == 'patient_add') echo 'active'; ?> ">
+                    <a href="<?php echo base_url(); ?>index.php?admin/patient_add" target="_self" >
+                        <span><i class="entypo-dot"></i> <?php echo get_phrase('admit_patient'); ?></span>
+                    </a>
+                </li>
+				   <li class="<?php if ($page_name == 'new_patient') echo 'active'; ?> ">
+                <a href="<?php echo base_url(); ?>index.php?admin/new_patient">
+                <i class="entypo-dot"></i>
+                <span> New patient2</span>
+                </a>
+                 </li
+			
+				
+			
+
+                <!-- PATIENTS BULK ADMISSION -->
+                <li class="<?php if ($page_name == 'patient_bulk_add') echo 'active'; ?> ">
+                    <a href="<?php echo base_url(); ?>index.php?admin/patient_bulk_add" target="_self" >
+                        <span><i class="entypo-dot"></i> <?php echo get_phrase('admit_bulk'); ?></span>
+                    </a>
+                </li>
+
+                <!-- PATIENTS INFORMATION -->
+                <li class="<?php if ($page_name == 'patient_information') echo 'opened active'; ?> ">
+                    <a href="#">
+                        <span><i class="entypo-dot"></i> <?php  echo get_phrase('PatientByregion'); ?></span> 
+                    </a>
+                    <ul>
+                        <?php
+                        $classes = $this->db->get('class')->result_array();
+                        foreach ($classes as $row):
+                            ?>
+                            <li class="<?php if ($page_name == 'patient_information' &&  $class_id == $row['class_id']) echo 'active'; ?>">
+                                <a href="<?php echo base_url(); ?>index.php?admin/patient_information/<?php echo $row['class_id']; ?>" target="_self">
+                                   
+								   <span>  <i class="fa  fa-caret-right"></i>  <?php echo $row['name']; ?></span>
+									
+                                </a>
+                            </li>
+							
+                        <?php endforeach; ?>
+                    </ul>
+					
+                </li>
+            </ul>
+        </li>
+
+       <li class="">
+            <a href="">
+                <i class="entypo-users"></i>
+                 <span><?php echo get_phrase('User Accounts'); ?> </span>
+            </a>
+			
+			
+			   <ul>
+			      <li class="<?php if ($page_name == 'user_add') echo 'active'; ?> ">
+                    <a href="<?php echo base_url(); ?>index.php?admin/create_user" target="_self" >
+                        <span><i class="entypo-dot"></i> <?php echo get_phrase('register_new_user'); ?></span>
+                    </a>
+                </li>
+                <li class="<?php if ($page_name == 'users') echo 'active'; ?> ">
+                    <a href="<?php echo base_url(); ?>index.php?admin/user" target="_self" >
+                        <span><i class="entypo-dot"></i> <?php echo get_phrase('manage_users'); ?></span>
+                    </a>
+                </li>
+				
+				 <li class="<?php if ($page_name == 'deligated_users') echo 'active'; ?> ">
+                    <a href="<?php echo base_url(); ?>index.php?admin/deligated_users" target="_self" >
+                        <span><i class="entypo-dot"></i> <?php echo get_phrase('deligated  users'); ?></span>
+                    </a>
+                </li>
+				
+                <li class="<?php if ($page_name == 'active_user_list') echo 'active'; ?> ">
+                    <a href="<?php echo base_url(); ?>index.php?admin/activer_users" target="_self" >
+                        <span><i class="entypo-dot"></i> <?php  echo get_phrase('Monitor Active user'); ?> </span>
+                    </a>
+                </li>
+				   <li class="<?php if ($page_name == 'user_access_control_list') echo 'active'; ?> ">
+                    <a href="<?php echo base_url(); ?>index.php?admin/access_control" target="_self">
+                        <span><i class="entypo-dot"></i> <?php  echo get_phrase('access control list'); ?> </span>
+                    </a>
+                </li>
+				</ul>
+        </li>
+		
+		
+
+             <li class="<?php if ($page_name == 'user_stastics') echo 'opened active'; ?> ">
+                    <a href="#">
+                        <span>&nbsp;<i class="fa fa-user"></i> <?php  echo get_phrase('user_stastices'); ?></span> 
+                    </a>
+                    <ul>
+                        <?php
+                        $users = $this->db->get_where('admin', array('role' =>'User'))->result_array();
+                        foreach ($users as $row3):
+						//$admin_id2= $row3['admin_id'];
+                            ?>
+                            <li class="<?php if ($page_name == 'user_stastics') echo 'active'; ?>">
+                                <a href="<?php echo base_url(); ?>index.php?admin/user_stastics_report/<?php echo $row3['admin_id']; ?>">
+                                    <span><i class="entypo-dot"></i><?php echo $row3['name']; ?></span>
+									
+                                </a>
+                            </li>
+							
+                        <?php endforeach; ?>
+                    </ul>
+					
+                </li>
+        <!-- CLASS -->
+        <li class="<?php
+        if ($page_name == 'class' ||
+                $page_name == 'section')
+            echo 'opened active';
+        ?> ">
+            <a href="#">
+                <i class="entypo-flow-tree"></i>
+                <span><?php echo get_phrase('class'); ?></span>
+            </a>
+            <ul>
+                <li class="<?php if ($page_name == 'class') echo 'active'; ?> ">
+                    <a href="<?php echo base_url(); ?>index.php?admin/classes" target="_self" >
+                        <span><i class="entypo-dot"></i> <?php echo get_phrase('manage_classes'); ?></span>
+                    </a>
+                </li>
+                <li class="<?php if ($page_name == 'section') echo 'active'; ?> ">
+                    <a href="<?php echo base_url(); ?>index.php?admin/section" target="_self" >
+                        <span><i class="entypo-dot"></i> <?php echo get_phrase('manage_zone'); ?></span>
+                    </a>
+                </li>
+				
+				
+					   <li class="<?php if ($page_name == 'section') echo 'active'; ?> ">
+                    <a href="<?php echo base_url(); ?>index.php?admin/zone" target="_self" >
+                        <span><i class="entypo-dot"></i> <?php echo get_phrase('manage Woredas'); ?> </span>
+                    </a>
+                </li>
+				
+				
+				   <!-- PARENTS -->
+        <li class="<?php if ($page_name == 'kebele') echo 'active'; ?> ">
+            <a href="<?php echo base_url(); ?>index.php?admin/kebele" target="_self">
+                <i class="entypo-dot"></i> 
+                <span><?php echo get_phrase('manage Kebele'); ?></span>
+            </a>
+        </li>
+				
+	
+		
+            </ul>
+        </li>
+
+       
+		
+     <!-- NOTICEBOARD -->
+        <li class="<?php if ($page_name == 'hmis_data') echo 'active'; ?> ">
+            <a href="<?php echo base_url(); ?>index.php?admin/hmis_data_view">
+                <i class="entypo-chart-bar"></i>
+                <span><?php echo get_phrase('hmis_data'); ?></span>
+            </a>
+        </li>
+
+
+        <!-- finance info -->
+        <li class="<?php if ($page_name == 'finance') echo 'active'; ?> ">
+            <a href="<?php echo base_url(); ?>index.php?admin/finance" target="_self" >
+                &nbsp;&nbsp;<i class="fa fa-usd"></i>
+                <span><?php echo get_phrase('finance'); ?></span>
+            </a>
+        </li>
+		
+		 <!-- general_stastices -->
+        <li class="<?php if ($page_name == 'general_stastices') echo 'active'; ?> ">
+            <a href="<?php echo base_url(); ?>index.php?admin/general_view">
+                &nbsp;<i class="fa fa-bars"></i>
+                <span><?php echo get_phrase('general_finance_stastices'); ?></span>
+            </a>
+        </li>
+
+
+  
+        <!-- NOTICEBOARD -->
+        <li class="<?php if ($page_name == 'noticeboard') echo 'active'; ?> ">
+            <a href="<?php echo base_url(); ?>index.php?admin/noticeboard" target="_self" >
+                <i class="entypo-doc-text-inv"></i>
+                <span><?php echo get_phrase('noticeboard'); ?></span>
+            </a>
+        </li>
+        <!-- MESSAGE -->
+		<li class="<?php if ($page_name == 'message') echo 'active'; ?> ">
+            <a href="<?php echo base_url(); ?>index.php?admin/message" target="_self" >
+                <i class="entypo-mail"></i>
+                <span><?php echo get_phrase('message'); ?></span>
+            </a>
+			
+                 <ul>
+                <li class="<?php if ($page_name == 'message') echo 'active'; ?> ">
+                    <a href="<?php echo base_url(); ?>index.php?admin/message/message_home" >
+                        <span><i class="entypo-dot"></i><?php echo get_phrase('messages'); ?> 
+                    </a>
+                </li>
+                <li class="<?php if ($page_name == 'message') echo 'active'; ?> ">
+                    <a href="<?php echo base_url(); ?>index.php?admin/message/message_new" target="_self" >
+                        <span><i class="entypo-dot"></i><?php echo get_phrase('new_message'); ?></span>
+                    </a>
+                </li>
+				
+            
+            </ul>		
+        </li>
+        <!-- SETTINGS -->
+        <li class="<?php
+        if ($page_name == 'system_settings' ||
+                $page_name == 'manage_language' ||
+                    $page_name == 'sms_settings')
+                        echo 'opened active';
+        ?> ">
+            <a href="#">
+               &nbsp;<i class="fa fa-wrench"></i>  
+                <span><?php echo get_phrase('system_settings'); ?></span>
+            </a>
+            <ul>
+                <li class="<?php if ($page_name == 'system_settings') echo 'active'; ?> ">
+                    <a href="<?php echo base_url(); ?>index.php?admin/system_settings" target="_self" >
+                        <span><i class="entypo-dot"></i> <?php echo get_phrase('general_settings'); ?></span>
+                    </a>
+                </li>
+                <li class="<?php if ($page_name == 'sms_settings') echo 'active'; ?> ">
+                    <a href="<?php echo base_url(); ?>index.php?admin/sms_settings" target="_self" >
+                        <span><i class="entypo-dot"></i> <?php echo get_phrase('add parameters'); ?> </span>
+                    </a>
+                </li>
+
+                <li class="<?php if ($page_name == 'manage_language') echo 'active'; ?> ">
+                    <a href="<?php echo base_url(); ?>index.php?admin/manage_language" target="_self" >
+                        <span><i class="entypo-dot"></i> <?php echo get_phrase('language_settings'); ?></span>
+                    </a>
+                </li>
+				
+				
+				 <li class="<?php if($page_name == 'backup_restore')echo 'active';?>">
+
+                  <a href="<?php echo base_url();?>index.php?admin/backup_restore" target="_self" >
+
+                  <i class="entypo-dot"></i> <?php echo get_phrase('backup_restore');?>
+
+                  </a>
+
+                </li>
+			
+			
+				
+	 <li class="<?php if ($page_name == 'system_auding') echo 'active'; ?> ">
+            <a href="<?php echo base_url(); ?>index.php?admin/error_auding" target="_self" >
+                <i class="entypo-dot"></i> 
+                <span> <?php //echo get_phrase(''); ?>System Auding</span>
+            </a>
+        </li>  
+		
+	 <li class="<?php if ($page_name == 'admin_level_setting') echo 'active'; ?> ">
+            <a href="<?php echo base_url(); ?>index.php?admin/admin_setting" target="_self" >
+                <i class="entypo-dot"></i> 
+                <span> <?php  echo get_phrase('admin_level_setting'); ?></span>
+            </a>
+        </li>
+				
+            </ul>
+        </li>
+
+        <!-- ACCOUNT -->
+        <li class="<?php if ($page_name == 'manage_profile') echo 'active'; ?> ">
+            <a href="<?php echo base_url(); ?>index.php?admin/manage_profile/<?php echo $admin_id;?>" target="_self" >
+                <i class="entypo-lock"></i>
+                <span><?php echo get_phrase('account'); ?></span>
+            </a>
+        </li>
+		
+		     <li class="">
+            <a href="">
+                &nbsp;<i class="fa fa-print"></i>
+                 <span><?php echo get_phrase('generate_reports'); ?> </span>
+            </a>
+			
+			
+			   <ul>
+                <li class="<?php if ($page_name == 'report_by_month') echo 'active'; ?> ">
+                    <a href="<?php echo base_url(); ?>index.php?admin/report_by_month" target="_self" >
+                        <span><i class="entypo-dot"></i> <?php echo get_phrase('By Month'); ?></span>
+                    </a>
+                </li>
+                <li class="<?php if ($page_name == 'report_by_quarter') echo 'active'; ?> ">
+                    <a href="<?php echo base_url(); ?>index.php?admin/report_by_quarter" target="_self" >
+                        <span><i class="entypo-dot"></i> <?php  echo get_phrase('By Quarter'); ?> </span>
+                    </a>
+                </li>
+				
+				 <li class="<?php if ($page_name == 'customed_report') echo 'active'; ?> ">
+                    <a href="<?php echo base_url(); ?>index.php?admin/customed_report">
+                        <span><i class="entypo-dot"></i> <?php  echo get_phrase('customed_report'); ?> </span>
+                    </a>
+                </li>
+				    <li class="<?php if ($page_name == 'general_report') echo 'active'; ?> ">
+                    <a href="<?php echo base_url(); ?>index.php?admin/general_report_view">
+                        <span><i class="entypo-dot"></i> <?php  echo get_phrase('general_report'); ?> </span>
+                    </a>
+                </li>
+				  <li class="<?php if ($page_name == 'health_insurance_report') echo 'active'; ?> ">
+                    <a href="<?php echo base_url(); ?>index.php?admin/health_insurance_report">
+                        <span><i class="entypo-dot"></i> <?php  echo get_phrase('health_insurance_report'); ?> </span>
+                    </a>
+                </li>
+				</ul>
+        </li>
+		
+		     <li class="<?php if ($page_name == 'manage_profile') echo 'active'; ?> ">
+            <a href="<?php echo base_url();?>index.php?login/logout">
+                &nbsp;<i class="fa fa-sign-out"></i>
+                <span> <?php  echo get_phrase('logout'); ?></span>
+            </a>
+        </li>
+				
+
+    </ul>
+
+</div>
+
+              
