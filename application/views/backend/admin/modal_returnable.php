@@ -53,7 +53,7 @@ $Bed_fee= $row['Bed_fee'];
 								   <div class="form-group">
                                 <label class="col-sm-3 control-label"><?php echo get_phrase('fee_per day');?>:</label>
                                 <div class="col-sm-5">
-                                    <input type="number"  min ="46"  max="46" value="46"  placeholder ="Birr 46" class="form-control" name="input2"   onkeypress="return numbersOnly(event,this.value)" onChange="addition(addem)" required/>
+                                    <input type="number"  min ="44"  max="44" value="44"  placeholder ="Birr 44" class="form-control" name="input2"   onkeypress="return numbersOnly(event,this.value)" onChange="addition(addem)" required/>
                                 </div>.00
                             </div>
 						
